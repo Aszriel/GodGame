@@ -16,6 +16,11 @@ namespace GodGame
             Console.WriteLine($"{m_nom} nage");
         }
 
+        public EtreVivant Reproduction(EtreVivant p_etreVivant)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string ToString()
         {
             return $"{m_nom} est un Geochelone {m_sexe} ayant {m_nombreParents} de regne Animal et est un eucaryote multicellulaires";

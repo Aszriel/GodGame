@@ -34,9 +34,19 @@ namespace GodGame
         /// Tue l'être vivant passé en paramètre, en mettant son état à false
         /// </summary>
         /// <param name="p_etreVivant">L'être vivant à tuer</param>
-        public static void tuer(EtreVivant p_etreVivant)
+        public static void Tuer(EtreVivant p_etreVivant)
         {
             p_etreVivant.m_etat = false;
+        }
+
+        public bool Etat
+        {
+            get { return m_etat; }
+        }
+
+        public String Nom
+        {
+            get { return m_nom; }
         }
 
         public abstract void Deplace();

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GodGame
 {
-    class GestVie<T>
+    class GestVie<T> where T : EtreVivant
     {
         private List<T> m_listEtreVivant;
 
@@ -25,27 +25,36 @@ namespace GodGame
          Console.WriteLine("Choix numéro 3 : Quitter le programme");
         }
 
-        public void ShowEtrevivant()
+        public static void ShowEtrevivant(List<T> p_listEtreVivant)
         {
-            foreach (T ev in m_listEtreVivant)
-            {
-                Console.WriteLine(ev);
+            int nombreMort = 0;
+            int nombreEnVie = 0;
+            foreach (T ev in p_listEtreVivant)
+            {           
+                if(ev.Etat == true)
+                {
+                    nombreEnVie++;
+                    Console.WriteLine(ev);
+                }
+                else  
+                    nombreMort++;
+                
+                    
             }
+            Console.WriteLine($"Nombre de mort(s) : {nombreMort}");
+            Console.WriteLine($"Nombre en vie : {nombreEnVie}");
         }
 
         public void Start()
         {
-            //Création d'un menu pour l'utilisateur
-            //Choix 1 Tuer
-            //Choix 2 Reproduire 
-            //Choix 3 Quitter le programme
             int Choix = 0;
             int ChoixAleatoire;
             int nombreEtreVivant = 1;
             Random aleatoire = new Random();
+            Menu();
             do
             {
-                Menu();
+                
                 Choix = int.Parse(Console.ReadLine());
                 switch (Choix)
                 {
@@ -55,11 +64,12 @@ namespace GodGame
                             //Génération d'un nombre aléatoire entre 1 et le nombre d'etre vivant 
                             nombreEtreVivant = m_listEtreVivant.Count;
                             ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
-                            Console.WriteLine(m_listEtreVivant[ChoixAleatoire]);
-                            //appeler gestion vie pour tuer l'etre vivant 
-
+                            EtreVivant.Tuer(m_listEtreVivant[ChoixAleatoire]);
+                            Console.WriteLine($"{m_listEtreVivant[ChoixAleatoire].Nom} a ete tue. ");            
+                            ShowEtrevivant(m_listEtreVivant);
                         }
                         break;
+
                     case 2: //Reproduire
                         for (int i = 0; i < 3; i++) // On essaye 3 reproduction
                         {
@@ -67,17 +77,17 @@ namespace GodGame
                             nombreEtreVivant = m_listEtreVivant.Count;
                             ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
                         }
-
                         break;
+
                     case 3:
                         Console.WriteLine("Fin Programme, Merci");
                         break;
+
                     default:
                         Console.WriteLine("Mauvaise Saisie veulliez réitérer");
                         Console.WriteLine();
                         break;
                 }
-
             } while (Choix != 3);
         }
     }

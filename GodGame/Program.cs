@@ -29,7 +29,7 @@ namespace GodGame
             GestVie<EtreVivant> gestionVie = new GestVie<EtreVivant>(listEtreVivant);
 
             //Affichage de tous les etres vivants présent au début du programme
-            gestionVie.ShowEtrevivant();
+            GestVie<EtreVivant>.ShowEtrevivant(listEtreVivant);
             
             //Lancement du programme
             gestionVie.Start();

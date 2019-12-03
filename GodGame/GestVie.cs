@@ -4,15 +4,15 @@ using System.Text;
 
 namespace GodGame
 {
-    class GestVie<T> where T : EtreVivant
+    class GestVie
     {
-        private List<T> m_listEtreVivant;
+        private List<EtreVivant> m_listEtreVivant;
 
         /// <summary>
         /// Constructeur prenant en entrée une liste d'être vivant à animer
         /// </summary>
         /// <param name="p_listEtreVivant">La liste d'êtres vivants à animer</param>
-        public GestVie(List<T> p_listEtreVivant)
+        public GestVie(List<EtreVivant> p_listEtreVivant)
         {
             m_listEtreVivant = p_listEtreVivant;
         }
@@ -25,11 +25,11 @@ namespace GodGame
          Console.WriteLine("Choix numéro 3 : Quitter le programme");
         }
 
-        public static void ShowEtrevivant(List<T> p_listEtreVivant)
+        public static void ShowEtrevivant(List<EtreVivant> p_listEtreVivant)
         {
             int nombreMort = 0;
             int nombreEnVie = 0;
-            foreach (T ev in p_listEtreVivant)
+            foreach (EtreVivant ev in p_listEtreVivant)
             {           
                 if(ev.Etat == true)
                 {

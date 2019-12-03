@@ -26,10 +26,10 @@ namespace GodGame
             listEtreVivant.Add(georgesGeochelone);
             #endregion
 
-            GestVie<EtreVivant> gestionVie = new GestVie<EtreVivant>(listEtreVivant);
+            GestVie gestionVie = new GestVie(listEtreVivant);
 
             //Affichage de tous les etres vivants présent au début du programme
-            GestVie<EtreVivant>.ShowEtrevivant(listEtreVivant);
+            GestVie.ShowEtrevivant(listEtreVivant);
             
             //Lancement du programme
             gestionVie.Start();

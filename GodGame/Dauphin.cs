@@ -18,7 +18,22 @@ namespace GodGame
 
         public override EtreVivantReproduction Reproduction(EtreVivantReproduction p_etreVivant)
         {
-            throw new NotImplementedException();
+            Random aleatoire = new Random();
+            int SexeRandom = aleatoire.Next(0, 1);
+            if (SexeRandom == 0) // Si masculin
+            {
+                int NomRandom = aleatoire.Next(1, EtreVivant.nomEtreVivantMasculin.Length);
+                String nom = EtreVivant.nomEtreVivantMasculin[NomRandom];
+                Dauphin dauphinM = new Dauphin(nom, 2, "male");
+                return dauphinM;
+            }
+            else //Sinon féminin
+            {
+                int NomRandom = aleatoire.Next(1, EtreVivant.nomEtreVivantFeminin.Length);
+                String nom = EtreVivant.nomEtreVivantFeminin[NomRandom];
+                Dauphin dauphinF = new Dauphin(nom, 2, "femelle");
+                return dauphinF;
+            }
         }
 
         public override string ToString()

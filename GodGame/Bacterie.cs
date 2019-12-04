@@ -18,7 +18,11 @@ namespace GodGame
 
         public override EtreVivantDivision Division()
         {
-            throw new NotImplementedException();
+            Random aleatoire = new Random();
+            int NomRandom = aleatoire.Next(1, EtreVivant.nomEtreVivantMasculin.Length);
+            String nom = EtreVivant.nomEtreVivantMasculin[NomRandom];
+            Bacterie b = new Bacterie(nom, 1, "none");
+            return b;
         }
 
         public override string ToString()

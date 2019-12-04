@@ -10,9 +10,10 @@ namespace GodGame
         private List<EtreVivantDivision> m_listEtreVivantDivision;
 
         /// <summary>
-        /// Constructeur prenant en entrée une liste d'être vivant à animer
+        /// Constructeur prenant en entrée deux listes d'êtres vivants à animer
         /// </summary>
-        /// <param name="p_listEtreVivantReproduction">La liste d'êtres vivants à animer</param>
+        /// <param name="p_listEtreVivantReproduction">La liste d'êtres vivants ,qui se reproduisent, à animer</param>
+        /// <param name="p_listEtreVivantDivision">La liste d'êtres vivants, qui se divisent, à animer</param>
         public GestVie(List<EtreVivantReproduction> p_listEtreVivantReproduction, List<EtreVivantDivision> p_listEtreVivantDivision)
         {
             m_listEtreVivantReproduction = p_listEtreVivantReproduction;

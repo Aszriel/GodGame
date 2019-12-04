@@ -15,6 +15,7 @@ namespace GodGame
             Corail pouletteCorail = new Corail("Poulette", 0, "femelle");
             Geochelone georgesGeochelone = new Geochelone("Georges", 0, "male");
             Bacterie michelBacterie = new Bacterie("Michel", 0, "none");
+            Bacterie GeorgesBacterie = new Bacterie("Georges", 0, "none");
             #endregion
 
             #region Ajouts dans la liste
@@ -28,6 +29,7 @@ namespace GodGame
 
             List<EtreVivantDivision> listEtreVivantDivision = new List<EtreVivantDivision>();
             listEtreVivantDivision.Add(michelBacterie);
+            listEtreVivantDivision.Add(GeorgesBacterie);
             #endregion
 
             GestVie gestionVie = new GestVie(listEtreVivantReproduction, listEtreVivantDivision);

@@ -28,6 +28,7 @@ namespace GodGame
          Console.WriteLine("Choix numéro 3 : Quitter le programme");
         }
 
+
         public static void ShowEtrevivant(List<EtreVivantReproduction> p_listEtreVivantReproduction, List<EtreVivantDivision> p_listEtreVivantDivision)
         {
             int nombreMort = 0;
@@ -61,12 +62,14 @@ namespace GodGame
         {
             int Choix = 0;
             int ChoixAleatoire;
-            int nombreEtreVivant = 1;
+            int nombreEtreVivant = 0;
+            int nombreTuerReproduire = 0;
+            int nombreTuerDivision = 0;
+            int nombreTuer = 0;
             Random aleatoire = new Random();
             Menu();
             do
             {
-                
                 Choix = int.Parse(Console.ReadLine());
                 switch (Choix)
                 {
@@ -74,11 +77,39 @@ namespace GodGame
                         for (int i = 0; i < 1; i++) // On ne tue que 1 etre vivant pour l'instant 
                         {
                             //Génération d'un nombre aléatoire entre 1 et le nombre d'etre vivant 
-                            nombreEtreVivant = m_listEtreVivantReproduction.Count;
-                            ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
-                            EtreVivant.Tuer(m_listEtreVivantReproduction[ChoixAleatoire]);
-                            Console.WriteLine($"{m_listEtreVivantReproduction[ChoixAleatoire].Nom} a ete tue. ");            
-                            ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
+                            nombreEtreVivant = m_listEtreVivantReproduction.Count + m_listEtreVivantDivision.Count;
+                            nombreTuer= nombreTuerDivision+ nombreTuerReproduire; 
+                            //On génére un nouveau nombre aléatoire si etat = false et seulement si tous les etre ne sont pas déjà mort
+                            if (nombreTuer!=nombreEtreVivant)
+                            {
+                                int listRandom = aleatoire.Next(0, 2);
+                                if(listRandom==0 && nombreTuerReproduire != m_listEtreVivantReproduction.Count)
+                                {
+                                    nombreTuerReproduire++;
+                                    do
+                                    {
+                                        ChoixAleatoire = aleatoire.Next(0, m_listEtreVivantReproduction.Count);
+                                    } while (m_listEtreVivantReproduction[ChoixAleatoire].Etat == false);
+                                    EtreVivant.Tuer(m_listEtreVivantReproduction[ChoixAleatoire]);
+                                    Console.WriteLine($"{m_listEtreVivantReproduction[ChoixAleatoire].Nom} a ete tue. ");
+                                    ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
+                                }
+                                else if(listRandom == 1 && nombreTuerDivision != m_listEtreVivantDivision.Count)
+                                {
+                                    nombreTuerDivision++;
+                                    do
+                                    {
+                                        ChoixAleatoire = aleatoire.Next(0, m_listEtreVivantDivision.Count);
+                                    } while (m_listEtreVivantDivision[ChoixAleatoire].Etat == false);
+                                    EtreVivant.Tuer(m_listEtreVivantDivision[ChoixAleatoire]);
+                                    Console.WriteLine($"{m_listEtreVivantDivision[ChoixAleatoire].Nom} a ete tue. ");
+                                    ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
+                                }else if(nombreTuerDivision >= m_listEtreVivantDivision.Count)
+                                    Console.WriteLine("Impossible de tuer un etre vivant qui se divise, il ne reste plus personne!");
+
+                            }
+                            else if(nombreTuer >= nombreEtreVivant)
+                            Console.WriteLine("Impossible de tuer un etre vivant, il ne reste plus personne!");
                         }
                         break;
 
@@ -86,8 +117,17 @@ namespace GodGame
                         for (int i = 0; i < 3; i++) // On essaye 3 reproduction
                         {
                             //Génération d'un nombre aléatoire
-                            nombreEtreVivant = m_listEtreVivantReproduction.Count;
+                            nombreEtreVivant = m_listEtreVivantReproduction.Count + m_listEtreVivantDivision.Count;
                             ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
+                            int ChoixAleatoire2 = aleatoire.Next(1, nombreEtreVivant);
+                          /* if(m_listEtreVivant[ChoixAleatoire].GetType() == m_listEtreVivant[ChoixAleatoire2].GetType())
+                            {
+                                
+                            }
+                            else
+                            {
+                                Console.WriteLine("La reproduction entre ",m_listEtreVivant[ChoixAleatoire].Nom ,"et", m_listEtreVivant[ChoixAleatoire2].Nom, "a échoué");
+                            }*/
                         }
                         break;
 

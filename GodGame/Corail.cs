@@ -16,7 +16,7 @@ namespace GodGame
             Console.WriteLine($"{m_nom} ne se deplace pas");
         }
 
-        public EtreVivant Reproduction(EtreVivant p_etreVivant)
+        public override EtreVivantReproduction Reproduction(EtreVivantReproduction p_etreVivant)
         {
             throw new NotImplementedException();
         }

@@ -6,15 +6,17 @@ namespace GodGame
 {
     class GestVie
     {
-        private List<EtreVivant> m_listEtreVivant;
+        private List<EtreVivantReproduction> m_listEtreVivantReproduction;
+        private List<EtreVivantDivision> m_listEtreVivantDivision;
 
         /// <summary>
         /// Constructeur prenant en entrée une liste d'être vivant à animer
         /// </summary>
-        /// <param name="p_listEtreVivant">La liste d'êtres vivants à animer</param>
-        public GestVie(List<EtreVivant> p_listEtreVivant)
+        /// <param name="p_listEtreVivantReproduction">La liste d'êtres vivants à animer</param>
+        public GestVie(List<EtreVivantReproduction> p_listEtreVivantReproduction, List<EtreVivantDivision> p_listEtreVivantDivision)
         {
-            m_listEtreVivant = p_listEtreVivant;
+            m_listEtreVivantReproduction = p_listEtreVivantReproduction;
+            m_listEtreVivantDivision = p_listEtreVivantDivision;
         }
 
         private void Menu()
@@ -25,11 +27,11 @@ namespace GodGame
          Console.WriteLine("Choix numéro 3 : Quitter le programme");
         }
 
-        public static void ShowEtrevivant(List<EtreVivant> p_listEtreVivant)
+        public static void ShowEtrevivant(List<EtreVivantReproduction> p_listEtreVivantReproduction, List<EtreVivantDivision> p_listEtreVivantDivision)
         {
             int nombreMort = 0;
             int nombreEnVie = 0;
-            foreach (EtreVivant ev in p_listEtreVivant)
+            foreach (EtreVivant ev in p_listEtreVivantReproduction)
             {           
                 if(ev.Etat == true)
                 {
@@ -37,9 +39,18 @@ namespace GodGame
                     Console.WriteLine(ev);
                 }
                 else  
+                    nombreMort++;        
+            }
+
+            foreach (EtreVivant ev in p_listEtreVivantDivision)
+            {
+                if (ev.Etat == true)
+                {
+                    nombreEnVie++;
+                    Console.WriteLine(ev);
+                }
+                else
                     nombreMort++;
-                
-                    
             }
             Console.WriteLine($"Nombre de mort(s) : {nombreMort}");
             Console.WriteLine($"Nombre en vie : {nombreEnVie}");
@@ -62,11 +73,11 @@ namespace GodGame
                         for (int i = 0; i < 1; i++) // On ne tue que 1 etre vivant pour l'instant 
                         {
                             //Génération d'un nombre aléatoire entre 1 et le nombre d'etre vivant 
-                            nombreEtreVivant = m_listEtreVivant.Count;
+                            nombreEtreVivant = m_listEtreVivantReproduction.Count;
                             ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
-                            EtreVivant.Tuer(m_listEtreVivant[ChoixAleatoire]);
-                            Console.WriteLine($"{m_listEtreVivant[ChoixAleatoire].Nom} a ete tue. ");            
-                            ShowEtrevivant(m_listEtreVivant);
+                            EtreVivant.Tuer(m_listEtreVivantReproduction[ChoixAleatoire]);
+                            Console.WriteLine($"{m_listEtreVivantReproduction[ChoixAleatoire].Nom} a ete tue. ");            
+                            ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
                         }
                         break;
 
@@ -74,7 +85,7 @@ namespace GodGame
                         for (int i = 0; i < 3; i++) // On essaye 3 reproduction
                         {
                             //Génération d'un nombre aléatoire
-                            nombreEtreVivant = m_listEtreVivant.Count;
+                            nombreEtreVivant = m_listEtreVivantReproduction.Count;
                             ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
                         }
                         break;

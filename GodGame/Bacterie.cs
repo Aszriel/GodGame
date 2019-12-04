@@ -16,7 +16,7 @@ namespace GodGame
             Console.WriteLine($"{m_nom} nage dans le cytoplasme");
         }
 
-        public EtreVivant Reproduction(EtreVivant p_etreVivant)
+        public override EtreVivantDivision Division()
         {
             throw new NotImplementedException();
         }

@@ -6,6 +6,6 @@ namespace GodGame
 {
     interface IReproduction
     {
-        EtreVivant Reproduction(EtreVivant p_etreVivant);
+        EtreVivantReproduction Reproduction(EtreVivantReproduction p_etreVivant);
     }
 }

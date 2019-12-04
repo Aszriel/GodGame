@@ -7,6 +7,6 @@ namespace GodGame
     interface IDivision
     {
 
-       EtreVivant Division();
+       EtreVivantDivision Division();
     }
 }

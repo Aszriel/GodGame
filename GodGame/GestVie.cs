@@ -8,6 +8,7 @@ namespace GodGame
     {
         private List<EtreVivantReproduction> m_listEtreVivantReproduction;
         private List<EtreVivantDivision> m_listEtreVivantDivision;
+        private Geochelone m_george; // Sert uniquement à faire un get_type pour avoir son type lors de la reproduction(voir plus bas)
 
         /// <summary>
         /// Constructeur prenant en entrée deux listes d'êtres vivants à animer
@@ -18,6 +19,7 @@ namespace GodGame
         {
             m_listEtreVivantReproduction = p_listEtreVivantReproduction;
             m_listEtreVivantDivision = p_listEtreVivantDivision;
+            m_george = new Geochelone("george", 0, "masculin");
         }
 
         private void Menu()
@@ -114,21 +116,35 @@ namespace GodGame
                         break;
 
                     case 2: //Reproduire
-                        for (int i = 0; i < 3; i++) // On essaye 3 reproduction
+                        int nombreEtreVivantReproduction = m_listEtreVivantReproduction.Count;
+                        int nombreEtreVivantDivision = m_listEtreVivantDivision.Count;
+                        for(int i = 0; i < 3; i++) // On essaye 3 reproduction
                         {
                             //Génération d'un nombre aléatoire
-                            nombreEtreVivant = m_listEtreVivantReproduction.Count + m_listEtreVivantDivision.Count;
-                            ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
-                            int ChoixAleatoire2 = aleatoire.Next(1, nombreEtreVivant);
-                          /* if(m_listEtreVivant[ChoixAleatoire].GetType() == m_listEtreVivant[ChoixAleatoire2].GetType())
-                            {
+                            int choixAleatoireReproduction1 = aleatoire.Next(1, nombreEtreVivantReproduction);
+                            int choixAleatoireReproduction2 = aleatoire.Next(1, nombreEtreVivantReproduction);
+                            int choixAleatoireDivision = aleatoire.Next(1, nombreEtreVivantDivision);
+                            if (m_listEtreVivantReproduction[choixAleatoireReproduction1].GetType() == m_george.GetType() ||
+                                m_listEtreVivantReproduction[choixAleatoireReproduction2].GetType() == m_george.GetType())
+                                Console.WriteLine("George ne peut pas se reproduire");
+                            
                                 
-                            }
-                            else
+                           else if(m_listEtreVivantReproduction[choixAleatoireReproduction1].GetType() == m_listEtreVivantReproduction[choixAleatoireReproduction2].GetType())
                             {
-                                Console.WriteLine("La reproduction entre ",m_listEtreVivant[ChoixAleatoire].Nom ,"et", m_listEtreVivant[ChoixAleatoire2].Nom, "a échoué");
-                            }*/
+                               EtreVivantReproduction evr = m_listEtreVivantReproduction[choixAleatoireReproduction1].Reproduction(m_listEtreVivantReproduction[choixAleatoireReproduction2]);
+                                Console.WriteLine(evr);
+                               m_listEtreVivantReproduction.Add(evr);
+                            }
+                           else
+                            {
+                                Console.WriteLine($"La reproduction entre {m_listEtreVivantReproduction[choixAleatoireReproduction1].Nom} , et, {m_listEtreVivantReproduction[choixAleatoireReproduction2].Nom}, a échoué");
+                            }
+
+                            EtreVivantDivision evd = m_listEtreVivantDivision[choixAleatoireDivision].Division();
+                            m_listEtreVivantDivision.Add(evd);
+                            Console.WriteLine("");
                         }
+                        ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
                         break;
 
                     case 3:

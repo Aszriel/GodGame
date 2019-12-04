@@ -4,17 +4,28 @@ using System.Text;
 
 namespace GodGame
 {
-    class GestVie<T> where T : EtreVivant
+    class GestVie
     {
+<<<<<<< HEAD
         private List<EtreVivant> m_listEtreVivant;
+=======
+        private List<EtreVivantReproduction> m_listEtreVivantReproduction;
+        private List<EtreVivantDivision> m_listEtreVivantDivision;
+>>>>>>> master
 
         /// <summary>
         /// Constructeur prenant en entrée une liste d'être vivant à animer
         /// </summary>
+<<<<<<< HEAD
         /// <param name="p_listEtreVivant">La liste d'êtres vivants à animer</param>
         public GestVie(List<EtreVivant> p_listEtreVivant)
+=======
+        /// <param name="p_listEtreVivantReproduction">La liste d'êtres vivants à animer</param>
+        public GestVie(List<EtreVivantReproduction> p_listEtreVivantReproduction, List<EtreVivantDivision> p_listEtreVivantDivision)
+>>>>>>> master
         {
-            m_listEtreVivant = p_listEtreVivant;
+            m_listEtreVivantReproduction = p_listEtreVivantReproduction;
+            m_listEtreVivantDivision = p_listEtreVivantDivision;
         }
 
         private void Menu()
@@ -25,11 +36,15 @@ namespace GodGame
          Console.WriteLine("Choix numéro 3 : Quitter le programme");
         }
 
+<<<<<<< HEAD
         public static void ShowEtrevivant(List<EtreVivant> p_listEtreVivant)
+=======
+        public static void ShowEtrevivant(List<EtreVivantReproduction> p_listEtreVivantReproduction, List<EtreVivantDivision> p_listEtreVivantDivision)
+>>>>>>> master
         {
             int nombreMort = 0;
             int nombreEnVie = 0;
-            foreach (T ev in p_listEtreVivant)
+            foreach (EtreVivant ev in p_listEtreVivantReproduction)
             {           
                 if(ev.Etat == true)
                 {
@@ -37,9 +52,18 @@ namespace GodGame
                     Console.WriteLine(ev);
                 }
                 else  
+                    nombreMort++;        
+            }
+
+            foreach (EtreVivant ev in p_listEtreVivantDivision)
+            {
+                if (ev.Etat == true)
+                {
+                    nombreEnVie++;
+                    Console.WriteLine(ev);
+                }
+                else
                     nombreMort++;
-                
-                    
             }
             Console.WriteLine($"Nombre de mort(s) : {nombreMort}");
             Console.WriteLine($"Nombre en vie : {nombreEnVie}");
@@ -63,6 +87,7 @@ namespace GodGame
                         for (int i = 0; i < 1; i++) // On ne tue que 1 etre vivant pour l'instant 
                         {
                             //Génération d'un nombre aléatoire entre 1 et le nombre d'etre vivant 
+<<<<<<< HEAD
                             nombreEtreVivant = m_listEtreVivant.Count;
                             nombreTuer++; 
                             //On génére un nouveau nombre aléatoire si etat = false et seulement si tous les etre ne sont pas déjà mort
@@ -77,6 +102,13 @@ namespace GodGame
                                 ShowEtrevivant(m_listEtreVivant);  
                             }else
                             Console.WriteLine("Impossible de tuer un etre vivant, il ne reste plus personne!");
+=======
+                            nombreEtreVivant = m_listEtreVivantReproduction.Count;
+                            ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
+                            EtreVivant.Tuer(m_listEtreVivantReproduction[ChoixAleatoire]);
+                            Console.WriteLine($"{m_listEtreVivantReproduction[ChoixAleatoire].Nom} a ete tue. ");            
+                            ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
+>>>>>>> master
                         }
                         break;
 
@@ -84,7 +116,7 @@ namespace GodGame
                         for (int i = 0; i < 3; i++) // On essaye 3 reproduction
                         {
                             //Génération d'un nombre aléatoire
-                            nombreEtreVivant = m_listEtreVivant.Count;
+                            nombreEtreVivant = m_listEtreVivantReproduction.Count;
                             ChoixAleatoire = aleatoire.Next(1, nombreEtreVivant);
                             int ChoixAleatoire2 = aleatoire.Next(1, nombreEtreVivant);
                             if(m_listEtreVivant[ChoixAleatoire].GetType() == m_listEtreVivant[ChoixAleatoire2].GetType())

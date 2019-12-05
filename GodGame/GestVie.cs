@@ -46,6 +46,8 @@ namespace GodGame
                 {
                     nombreEnVie++;
                     Console.WriteLine(ev);
+                    ev.Deplace();
+                    Console.WriteLine();
                 }
                 else  
                     nombreMort++;        
@@ -57,6 +59,8 @@ namespace GodGame
                 {
                     nombreEnVie++;
                     Console.WriteLine(ev);
+                    ev.Deplace();
+                    Console.WriteLine();
                 }
                 else
                     nombreMort++;

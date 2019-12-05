@@ -19,7 +19,7 @@ namespace GodGame
         public override EtreVivantReproduction Reproduction(EtreVivantReproduction p_etreVivant)
         {
             Random aleatoire = new Random();
-            int SexeRandom = aleatoire.Next(0, 1);
+            int SexeRandom = aleatoire.Next(0, 2);
             if (SexeRandom == 0) // Si masculin
             {
                 int NomRandom = aleatoire.Next(1, EtreVivant.nomEtreVivantMasculin.Length);

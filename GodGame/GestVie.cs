@@ -31,13 +31,18 @@ namespace GodGame
         }
 
 
+        /// <summary>
+        /// Permet d'afficher l'ensemble des êtres vivants
+        /// </summary>
+        /// <param name="p_listEtreVivantReproduction">La liste des etres vivants par reproduction</param>
+        /// <param name="p_listEtreVivantDivision">La liste des êtres vivants par division</param>
         public static void ShowEtrevivant(List<EtreVivantReproduction> p_listEtreVivantReproduction, List<EtreVivantDivision> p_listEtreVivantDivision)
         {
             int nombreMort = 0;
             int nombreEnVie = 0;
             foreach (EtreVivant ev in p_listEtreVivantReproduction)
             {           
-                if(ev.Etat == true)
+                if(ev.Etat == true) // Si l'être vivant est mort
                 {
                     nombreEnVie++;
                     Console.WriteLine(ev);
@@ -60,6 +65,9 @@ namespace GodGame
             Console.WriteLine($"Nombre en vie : {nombreEnVie}");
         }
 
+        /// <summary>
+        /// Fonction principale permettant de lancer le jeu
+        /// </summary>
         public void Start()
         {
             int Choix = 0;
@@ -91,7 +99,8 @@ namespace GodGame
                                     do
                                     {
                                         ChoixAleatoire = aleatoire.Next(0, m_listEtreVivantReproduction.Count);
-                                    } while (m_listEtreVivantReproduction[ChoixAleatoire].Etat == false);
+                                    }
+                                    while (m_listEtreVivantReproduction[ChoixAleatoire].Etat == false); // On boucle tant que l'être vivant choisit est déjà mort
                                     EtreVivant.Tuer(m_listEtreVivantReproduction[ChoixAleatoire]);
                                     Console.WriteLine($"{m_listEtreVivantReproduction[ChoixAleatoire].Nom} a ete tue. ");
                                     ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
@@ -102,7 +111,8 @@ namespace GodGame
                                     do
                                     {
                                         ChoixAleatoire = aleatoire.Next(0, m_listEtreVivantDivision.Count);
-                                    } while (m_listEtreVivantDivision[ChoixAleatoire].Etat == false);
+                                    }
+                                    while (m_listEtreVivantDivision[ChoixAleatoire].Etat == false);
                                     EtreVivant.Tuer(m_listEtreVivantDivision[ChoixAleatoire]);
                                     Console.WriteLine($"{m_listEtreVivantDivision[ChoixAleatoire].Nom} a ete tue. ");
                                     ShowEtrevivant(m_listEtreVivantReproduction, m_listEtreVivantDivision);
